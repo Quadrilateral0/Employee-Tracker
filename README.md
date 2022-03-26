@@ -12,7 +12,7 @@ For this project, I created a command-line Content Management System (CMS) from 
 ## Usage
 Visit my application repo [here](https://github.com/Quadrilateral0/Employee-Tracker) and see below for a video demo.
 
-Run the backend server by completing the following in the terminal: 
+Run the server by completing the following in the terminal: 
 ```
 npm i
 npm start
