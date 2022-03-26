@@ -1,10 +1,10 @@
-INSERT INTO department (namee)
+INSERT INTO department (names)
 VALUES ("Human Resources"),
        ("Legal & Compliance"),
        ("Operations"),
        ("Sales");
 
-INSERT INTO rolee (department_id, title, salary)
+INSERT INTO roles (department_id, title, salary)
 VALUES (2, "Compliance Manager", 90000),
        (2, "Legal Consultant", 50000),
        (1, "HR Manager", 90000),
@@ -20,6 +20,6 @@ VALUES (2, "Compliance Manager", 90000),
 INSERT INTO employee (role_id, first_name, last_name, manager_id)
 VALUES (1, "Sam", "Brown", 9),
        (2, "Sally", "White", 1),
-       (9, "Bob", "Black"),
+       (9, "Bob", "Black", NULL),
        (3, "Jane", "Redd", 9),
        (4, "Stef", "Greene", 3);

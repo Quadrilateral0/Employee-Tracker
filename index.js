@@ -4,6 +4,18 @@ const inquirer = require('inquirer');
 const cTable = require('console.table');
 const fs = require('fs');
 
+//Connect to MySQL database
+const db = mysql.createConnection(
+    {
+      host: 'localhost',
+      user: 'root',
+      password: 'rootroot',
+      database: 'employee_db'
+    },
+    console.log(`Connected to the employee_db database.`)
+  );
+
+function menu() {
 inquirer
     .prompt([
         {
@@ -13,18 +25,27 @@ inquirer
             choices: ['View all departments', 'View all roles', 'View all employees', new inquirer.Separator(),
             'Add a department', 'Add a role', 'Add an employee', new inquirer.Separator(), 'Update an employee role',
             new inquirer.Separator()]
-        }, 
+        } 
     ])
     .then((answers) => {
         if (answers.menu === 'View all departments') {
             //PRINT SQL OUTPUT OF DEPARTMENT TABLE USING CTABLE;
-            return inquirer.prompt();
+            db.query('SELECT * FROM departments', function (err, answers) {
+                console.table(answers);
+              });
+            return;
         } else if (answers.menu === 'View all roles') {
             //PRINT SQL OUTPUT OF ROLES TABLE USING CTABLE;
-            return inquirer.prompt();
+            db.query('SELECT * FROM roles', function (err, answers) {
+                console.table(answers);
+              });
+            return;
         } else if (answers.menu === 'View all employees') {
             //PRINT SQL OUTPUT OF EMPLOYEES TABLE USING CTABLE;
-            return inquirer.prompt();
+            db.query('SELECT * FROM employee', function (err, answers) {
+                console.table(answers);
+              });
+            return;
         } else if (answers.menu === 'Add a department') {   
             inquirer.prompt([
                 {
@@ -38,7 +59,7 @@ inquirer
             //Adding a department to department table
             const content = `${data.department}`//Write db.query() function here to insert data to table
 
-             //Append to schema.sql file
+             //Append to schema.sql file 
             fs.appendFile("db/schema.sql", content, (err) =>
             err ? console.log(err) : console.log('Success!'));
             return;
@@ -130,14 +151,6 @@ inquirer
             });  
         }
     });
+}
 
-// //Connect to MySQL database
-// const db = mysql.createConnection(
-//     {
-//       host: 'localhost',
-//       user: 'root',
-//       password: 'rootroot',
-//       database: 'employee_db'
-//     },
-//     console.log(`Connected to the employee_db database.`)
-//   );
+menu();
