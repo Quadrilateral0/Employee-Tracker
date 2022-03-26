@@ -34,14 +34,35 @@ inquirer
             ])
             .then((data) => {
 
-//Adding a department to department table
-const content = `${data.department}`//Write db.query() function here to insert data to table
+            //Adding a department to department table
+            const content = `${data.department}`//Write db.query() function here to insert data to table
 
-        //Append to schema.sql file
-        fs.appendFile('schema.sql', content, (err) =>
-        err ? console.log(err) : console.log('Success!'));
-        return;
-    })}});
+             //Append to schema.sql file
+            fs.appendFile("db/schema.sql", content, (err) =>
+            err ? console.log(err) : console.log('Success!'));
+            return;
+            });
+
+        } else if (answers.menu === 'Add a role') {   
+            inquirer.prompt([
+                {
+                    type: "input",
+                    name: "role",
+                    message: "What is the name of the new employee role?",
+                }
+            ])
+            .then((data) => {
+
+            //Adding a department to department table
+            const content = `${data.role}`//Write db.query() function here to insert data to table
+
+             //Append to schema.sql file
+            fs.appendFile("db/schema.sql", content, (err) =>
+            err ? console.log(err) : console.log('Success!'));
+            return;
+            });  
+        }
+    });
 
 // //Connect to MySQL database
 // const db = mysql.createConnection(
