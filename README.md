@@ -17,9 +17,7 @@ Run the server by completing the following in the terminal:
 npm i
 npm start
 ```
-
-![Video demo of completed project](assets/employee-tracker-demo.png)
-
+[![Video demo of completed project](assets/employee-tracker-demo.png)](https://youtu.be/2Cr3HDTEFqc)
 
 ## User Story
 

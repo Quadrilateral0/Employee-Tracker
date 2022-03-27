@@ -54,12 +54,15 @@ inquirer
                     message: "What is the name of the new department?",
                 }
             ])
-            .then((answers) => {
+            .then((answers) => { 
 
             //Adding a department to department table
-            db.query(`INSERT INTO department (names) VALUES (${answers})`, function (err, answers) {
-                console.log(answers);
-              });
+            db.query(
+                `INSERT INTO department (names) VALUES ("${String(answers.department)}")`, function (err, answers) {
+                  if (err) console.log(err);
+                }
+            );
+
             db.query('SELECT * FROM department', function (err, answers) {
                 console.table(answers);
               });
@@ -88,9 +91,12 @@ inquirer
             .then((answers) => {
 
             //Adding a role to role table
-            db.query(`INSERT INTO roles (title, salary) VALUES (${answers.title}, ${answers.salary})`, function (err, answers) {
-                console.log(answers);
-              });
+            db.query(
+                `INSERT INTO roles (title, salary) VALUES ("${String(answers.title)}", "${String(answers.salary)}")`, function (err, answers) {
+                  if (err) console.log(err);
+                }
+            );
+
             db.query('SELECT * FROM roles', function (err, answers) {
                 console.table(answers);
               });
@@ -120,14 +126,18 @@ inquirer
             .then((answers) => {
 
             //Adding an employee to employee table
-            db.query(`INSERT INTO employee (first_name, last_name) VALUES (${answers.first}, ${answers.last})`, function (err, answers) {
-                console.log(answers);
-              });
+            db.query(
+                `INSERT INTO employee (first_name, last_name) VALUES ("${String(answers.first)}", "${String(answers.last)}")`, function (err, answers) {
+                  if (err) console.log(err);
+                }
+            );
+
             db.query('SELECT * FROM employee', function (err, answers) {
                 console.table(answers);
               });
             return;
             });  
+
         } else if (answers.menu === 'Update an employee role') {   
             inquirer.prompt([
                 {
@@ -142,11 +152,11 @@ inquirer
                     message: "What is the new role of the employee?",
                 },
             ])
-            .then((answers) => {
+            .then((answers) => { console.log(answers);
 
                 //Changing an employee's role
                 db.query(`ENTER QUERY HERE`, function (err, answers) {
-                    console.log(answers);
+                    //console.log(answers);
                   });
                 return;
             });  
