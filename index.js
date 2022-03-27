@@ -30,7 +30,7 @@ inquirer
     .then((answers) => {
         if (answers.menu === 'View all departments') {
             //PRINT SQL OUTPUT OF DEPARTMENT TABLE USING CTABLE;
-            db.query('SELECT * FROM departments', function (err, answers) {
+            db.query('SELECT * FROM department', function (err, answers) {
                 console.table(answers);
               });
             return;
@@ -54,14 +54,15 @@ inquirer
                     message: "What is the name of the new department?",
                 }
             ])
-            .then((data) => {
+            .then((answers) => {
 
             //Adding a department to department table
-            const content = `${data.department}`//Write db.query() function here to insert data to table
-
-             //Append to schema.sql file 
-            fs.appendFile("db/schema.sql", content, (err) =>
-            err ? console.log(err) : console.log('Success!'));
+            db.query(`INSERT INTO department (names) VALUES (${answers})`, function (err, answers) {
+                console.log(answers);
+              });
+            db.query('SELECT * FROM department', function (err, answers) {
+                console.table(answers);
+              });
             return;
             });
 
@@ -69,7 +70,7 @@ inquirer
             inquirer.prompt([
                 {
                     type: "input",
-                    name: "name",
+                    name: "title",
                     message: "What is the name of the new employee role?",
                 },
                 {
@@ -84,14 +85,15 @@ inquirer
                     choices: ['Human Resources', 'Legal & Compliance', 'Operations', 'Sales']
                 }
             ])
-            .then((data) => {
+            .then((answers) => {
 
-            //Adding a role to rolee table
-            const content = `${data.name}`//Write db.query() function here to insert data to table
-
-             //Append to schema.sql file
-            fs.appendFile("db/schema.sql", content, (err) =>
-            err ? console.log(err) : console.log('Success!'));
+            //Adding a role to role table
+            db.query(`INSERT INTO roles (title, salary) VALUES (${answers.title}, ${answers.salary})`, function (err, answers) {
+                console.log(answers);
+              });
+            db.query('SELECT * FROM roles', function (err, answers) {
+                console.table(answers);
+              });
             return;
             });  
 
@@ -115,14 +117,15 @@ inquirer
                     'Operations Specialist', 'Operations Manager', 'Sales Specialist', 'Sales Manager']
                 }
             ])
-            .then((data) => {
+            .then((answers) => {
 
             //Adding an employee to employee table
-            const content = `${data.role}`//Write db.query() function here to insert data to table
-
-             //Append to schema.sql file
-            fs.appendFile("db/schema.sql", content, (err) =>
-            err ? console.log(err) : console.log('Success!'));
+            db.query(`INSERT INTO employee (first_name, last_name) VALUES (${answers.first}, ${answers.last})`, function (err, answers) {
+                console.log(answers);
+              });
+            db.query('SELECT * FROM employee', function (err, answers) {
+                console.table(answers);
+              });
             return;
             });  
         } else if (answers.menu === 'Update an employee role') {   
@@ -131,7 +134,7 @@ inquirer
                     type: "list",
                     name: "choose",
                     message: "What is the employee's last name?",
-                    choices: ['']
+                    choices: ['Brown', 'White', 'Black', 'Redd', 'Greene']
                 },
                 {
                     type: "input",
@@ -139,15 +142,13 @@ inquirer
                     message: "What is the new role of the employee?",
                 },
             ])
-            .then((data) => {
+            .then((answers) => {
 
-            //Changing a role in rolee table
-            const content = `${data.role}`//Write db.query() function here to insert data to table
-
-             //Append to schema.sql file
-            fs.appendFile("db/schema.sql", content, (err) =>
-            err ? console.log(err) : console.log('Success!'));
-            return;
+                //Changing an employee's role
+                db.query(`ENTER QUERY HERE`, function (err, answers) {
+                    console.log(answers);
+                  });
+                return;
             });  
         }
     });
